@@ -64,3 +64,19 @@ fslmaths MIST/"$parc"_MNIPediatricAsym_cohort-5_res-2.nii.gz \
 -mul ../derivs_M3/fmriprep/sub-"$1"/func/sub-"$1"_task-rest_space-MNIPediatricAsym_cohort-5_res-2_desc-brain_mask.nii.gz \
 MIST/intersected_ROIs/sub-"$1"_ses-M3_"$parc"_MNIPediatricAsym_cohort-5_res-2.nii.gz
 ```
+
+Extract time-sries from parcellation (AFNI)
+
+```
+3dROIstats -mask MIST/intersected_ROIs/sub-"$1"_ses-B0_MIST_325_MNIPediatricAsym_cohort-5_res-2.nii.gz \
+-roisel eligible_ROIs_MIST325.txt -quiet \
+../denoising_B0/sub-"$1"/sub-"$1"_denoised_"$2".nii.gz> actual_TS/sub-"$1"_TS_MIST325_"$2".txt
+```
+
+Resample an image (for example parcellation to func size) in AFNI
+
+```
+3dresample -master derivatives/fmriprep/sub-"$sub"/ses-01/func/sub-"$sub"_ses-01_task-5000scenes_run-01_bold_GLM_6MO_FD_FD-dv.nii.gz \
+-prefix derivatives/fmriprep/sub-"$sub"/ses-01/func/sub-"$sub"_v1_mask_GM_res.nii.gz \
+-input derivatives/fmriprep/sub-"$sub"/ses-01/func/sub-"$sub"_v1_mask_GM.nii.gz
+```
