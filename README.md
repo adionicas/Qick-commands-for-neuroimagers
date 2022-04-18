@@ -119,3 +119,11 @@ fslmeants -i "$sub"/func/"$sub"_mo_deriv_spkreg.nii.gz \
 --label="juelich_prob_GM_Visual_cortex_V1_BA17_both_fsl_thr_bin2funcdim.nii.gz"
 ```
 
+Calculate mean across time (AFNI)
+
+```
+3dTstat -prefix ./sub-"$sub"/func/sub-"$sub"_task-rest_bold_mean_vol_pre.nii.gz \
+./sub-"$sub"/func/sub-"$sub"_task-rest_bold.nii.gz \
+&>> log_mean_vol.log
+```
+
