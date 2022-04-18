@@ -2,6 +2,20 @@
 This is a collection of AFNI and FSL commands for image manipulation that run in bash.
 
 
+Put dicom data in BIDS (func)
+
+```
+old_name="WM14_005"
+new_name="ACAP8005"
+mkdir -p BIDS_fmri_ACAP8/sub-"$new_name"/func
+dcm2niix \
+-o BIDS_fmri_ACAP8/sub-"$new_name"/func \
+-x n -b y \
+-f sub-"$new_name"_task-rest_bold \
+-z y \
+$old_name/fMRI*PRE*/*
+```
+
 Check voxelsize with FSL [each dimension is: x, y, z, TR, scan length]
 
 ```
