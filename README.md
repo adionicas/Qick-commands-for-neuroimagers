@@ -110,3 +110,12 @@ antsAtroposN4.sh \
 -w 0.25 \
 -o test_tmp_output
 ```
+
+Extract time-series from image (FSL)
+
+```
+fslmeants -i "$sub"/func/"$sub"_mo_deriv_spkreg.nii.gz \
+-o V1_TS/"$sub"_V1_mo_deriv_spkreg.txt \
+--label="juelich_prob_GM_Visual_cortex_V1_BA17_both_fsl_thr_bin2funcdim.nii.gz"
+```
+
