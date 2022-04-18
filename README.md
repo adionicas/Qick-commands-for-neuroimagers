@@ -2,7 +2,7 @@
 This is a collection of AFNI and FSL commands for image manipulation that run in bash.
 
 
-Put dicom data in BIDS (func)
+Put dicom data in BIDS - will generate .json file together with the .nii.gz img (func)
 
 ```
 old_name="WM14_005"
