@@ -80,3 +80,33 @@ Resample an image (for example parcellation to func size) in AFNI
 -prefix derivatives/fmriprep/sub-"$sub"/ses-01/func/sub-"$sub"_v1_mask_GM_res.nii.gz \
 -input derivatives/fmriprep/sub-"$sub"/ses-01/func/sub-"$sub"_v1_mask_GM.nii.gz
 ```
+
+Obtain derivatives (AFNI)
+
+```
+1d_tool.py -infile denoising_B0/sub-"$1"/sub-"$1"_raw_regressors_36p.txt \
+-derivative \
+-write denoising_B0/sub-"$1"/sub-"$1"_raw_regressors_36p_deriv.txt
+```
+
+Remove linear and ^2 trends from .txt file vect (AFNI)
+
+```
+3dDetrend -DAFNI_1D_TRANOUT=YES \
+-prefix - \
+-polort 2 \
+denoising_B0/sub-"$1"/sub-"$1"_final_regressors_36p.1D\' \
+> denoising_B0/sub-"$1"/sub-"$1"_final_regressors_36p_detrended.txt
+```
+
+Segmentation example (ANTS)
+
+```
+antsAtroposN4.sh \
+-d 3 \
+-a ../sub-ACAP1003_desc-preproc_T1w.nii.gz \
+-x ../sub-ACAP1003_desc-brain_mask.nii.gz \
+-c 6 \
+-w 0.25 \
+-o test_tmp_output
+```
