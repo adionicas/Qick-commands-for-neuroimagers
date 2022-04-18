@@ -56,3 +56,11 @@ Erode a mask (FSL)
 fslmaths "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_thr-bin.nii.gz \
 -kernel gauss 3 -ero "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_ERO.nii.gz
 ```
+
+Intrsect two images (FSL)
+
+```
+fslmaths MIST/"$parc"_MNIPediatricAsym_cohort-5_res-2.nii.gz \
+-mul ../derivs_M3/fmriprep/sub-"$1"/func/sub-"$1"_task-rest_space-MNIPediatricAsym_cohort-5_res-2_desc-brain_mask.nii.gz \
+MIST/intersected_ROIs/sub-"$1"_ses-M3_"$parc"_MNIPediatricAsym_cohort-5_res-2.nii.gz
+```
