@@ -22,3 +22,23 @@ fsl_motion_outliers -i sub-${1}_func_img.nii.gz \
 --fdrms --thresh=0.2 -v
 
 ```
+
+Binarize image (FSL)
+
+```
+fslmaths img_wei.nii.gz -bin img_bin.nii.gz
+```
+
+Probability threshold - for example for pvals randomise output or for segmentation (FSL)
+
+```
+fslmaths "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg.nii.gz \\
+-thrp 99 "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_thr.nii.gz
+```
+
+Erode a mask (FSL)
+
+```
+fslmaths "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_thr-bin.nii.gz \
+-kernel gauss 3 -ero "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_ERO.nii.gz
+```
