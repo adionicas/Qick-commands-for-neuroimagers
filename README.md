@@ -28,7 +28,7 @@ fslval $img dim4
 
 Extract FD and dummy FD spikes
 
-```
+```autohotkey
 fsl_motion_outliers -i sub-${1}_func_img.nii.gz \
 -o sub-${1}_outliers_dummy.txt \
 -s sub-${1}_FD_RMS_vect.txt \
@@ -39,27 +39,27 @@ fsl_motion_outliers -i sub-${1}_func_img.nii.gz \
 
 Binarize image (FSL)
 
-```
+```autohotkey
 fslmaths img_wei.nii.gz -bin img_bin.nii.gz
 ```
 
 Probability threshold - for example for pvals randomise output or for segmentation (FSL)
 
-```
+```autohotkey
 fslmaths "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg.nii.gz \\
 -thrp 99 "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_thr.nii.gz
 ```
 
 Erode a mask (FSL)
 
-```
+```autohotkey
 fslmaths "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_thr-bin.nii.gz \
 -kernel gauss 3 -ero "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_ERO.nii.gz
 ```
 
 Intrsect two images (FSL)
 
-```
+```autohotkey
 fslmaths MIST/"$parc"_MNIPediatricAsym_cohort-5_res-2.nii.gz \
 -mul ../derivs_M3/fmriprep/sub-"$1"/func/sub-"$1"_task-rest_space-MNIPediatricAsym_cohort-5_res-2_desc-brain_mask.nii.gz \
 MIST/intersected_ROIs/sub-"$1"_ses-M3_"$parc"_MNIPediatricAsym_cohort-5_res-2.nii.gz
@@ -67,7 +67,7 @@ MIST/intersected_ROIs/sub-"$1"_ses-M3_"$parc"_MNIPediatricAsym_cohort-5_res-2.ni
 
 Extract time-sries from parcellation (AFNI)
 
-```
+```autohotkey
 3dROIstats -mask MIST/intersected_ROIs/sub-"$1"_ses-B0_MIST_325_MNIPediatricAsym_cohort-5_res-2.nii.gz \
 -roisel eligible_ROIs_MIST325.txt -quiet \
 ../denoising_B0/sub-"$1"/sub-"$1"_denoised_"$2".nii.gz> actual_TS/sub-"$1"_TS_MIST325_"$2".txt
@@ -75,7 +75,7 @@ Extract time-sries from parcellation (AFNI)
 
 Resample an image (for example parcellation to func size) in AFNI
 
-```
+```autohotkey
 3dresample -master derivatives/fmriprep/sub-"$sub"/ses-01/func/sub-"$sub"_ses-01_task-5000scenes_run-01_bold_GLM_6MO_FD_FD-dv.nii.gz \
 -prefix derivatives/fmriprep/sub-"$sub"/ses-01/func/sub-"$sub"_v1_mask_GM_res.nii.gz \
 -input derivatives/fmriprep/sub-"$sub"/ses-01/func/sub-"$sub"_v1_mask_GM.nii.gz
@@ -83,7 +83,7 @@ Resample an image (for example parcellation to func size) in AFNI
 
 Obtain derivatives (AFNI)
 
-```
+```autohotkey
 1d_tool.py -infile denoising_B0/sub-"$1"/sub-"$1"_raw_regressors_36p.txt \
 -derivative \
 -write denoising_B0/sub-"$1"/sub-"$1"_raw_regressors_36p_deriv.txt
@@ -91,7 +91,7 @@ Obtain derivatives (AFNI)
 
 Remove linear and ^2 trends from .txt file vect (AFNI)
 
-```
+```autohotkey
 3dDetrend -DAFNI_1D_TRANOUT=YES \
 -prefix - \
 -polort 2 \
@@ -101,7 +101,7 @@ denoising_B0/sub-"$1"/sub-"$1"_final_regressors_36p.1D\' \
 
 Segmentation example (ANTS)
 
-```
+```autohotkey
 antsAtroposN4.sh \
 -d 3 \
 -a ../sub-ACAP1003_desc-preproc_T1w.nii.gz \
@@ -113,7 +113,7 @@ antsAtroposN4.sh \
 
 Extract time-series from image (FSL)
 
-```
+```autohotkey
 fslmeants -i "$sub"/func/"$sub"_mo_deriv_spkreg.nii.gz \
 -o V1_TS/"$sub"_V1_mo_deriv_spkreg.txt \
 --label="juelich_prob_GM_Visual_cortex_V1_BA17_both_fsl_thr_bin2funcdim.nii.gz"
