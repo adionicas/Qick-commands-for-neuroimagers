@@ -4,7 +4,7 @@ This is a collection of AFNI and FSL commands for image manipulation that run in
 
 Put dicom data in BIDS - will generate .json file together with the .nii.gz img (func)
 
-```
+```autohotkey
 old_name="WM14_005"
 new_name="ACAP8005"
 mkdir -p BIDS_fmri_ACAP8/sub-"$new_name"/func
@@ -18,7 +18,7 @@ $old_name/fMRI*PRE*/*
 
 Check voxelsize with FSL [each dimension is: x, y, z, TR, scan length]
 
-```
+```autohotkey
 fslval $img pixdim1
 fslval $img pixdim2
 fslval $img pixdim3
