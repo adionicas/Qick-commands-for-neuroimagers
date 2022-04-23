@@ -16,7 +16,7 @@ dcm2niix \
 $old_name/fMRI*PRE*/*
 ```
 
-Check voxelsize with FSL [each dimension is: x, y, z, TR, scan length]
+Check voxel size with FSL [each dimension is: x, y, z, TR, scan length]
 
 ```autohotkey
 fslval $img pixdim1
@@ -57,7 +57,7 @@ fslmaths "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_thr-bi
 -kernel gauss 3 -ero "$1"/anat/"$1"_space-MNIPediatricAsym_cohort-5_label-CSF_probseg_ERO.nii.gz
 ```
 
-Intrsect two images (FSL)
+Intersect two images (FSL)
 
 ```autohotkey
 fslmaths MIST/"$parc"_MNIPediatricAsym_cohort-5_res-2.nii.gz \
@@ -65,7 +65,7 @@ fslmaths MIST/"$parc"_MNIPediatricAsym_cohort-5_res-2.nii.gz \
 MIST/intersected_ROIs/sub-"$1"_ses-M3_"$parc"_MNIPediatricAsym_cohort-5_res-2.nii.gz
 ```
 
-Extract time-sries from parcellation (AFNI)
+Extract time-series from parcellation (AFNI)
 
 ```autohotkey
 3dROIstats -mask MIST/intersected_ROIs/sub-"$1"_ses-B0_MIST_325_MNIPediatricAsym_cohort-5_res-2.nii.gz \
@@ -126,4 +126,3 @@ Calculate mean across time (AFNI)
 ./sub-"$sub"/func/sub-"$sub"_task-rest_bold.nii.gz \
 &>> log_mean_vol.log
 ```
-
