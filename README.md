@@ -1,4 +1,4 @@
-# Qick-commands-for-neuroimagers
+# Qick-commands-for-neuroimaging
 This is a collection of AFNI and FSL commands for image manipulation that run in bash.
 
 
